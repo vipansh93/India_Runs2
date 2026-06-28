@@ -32,7 +32,7 @@ else:
 
 # Default search paths
 CANDIDATES_PATH = os.path.join(exe_dir, "candidates.jsonl")
-SUBMISSION_PATH = os.path.join(exe_dir, "team_antigravity.csv")
+SUBMISSION_PATH = os.path.join(exe_dir, "submission.csv")
 
 # Fallback checking
 if args.candidates and os.path.exists(args.candidates):

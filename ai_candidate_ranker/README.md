@@ -1,5 +1,5 @@
 # 🚀 AuraRecruit — AI Candidate Ranker
-### Built by Team Antigravity | India Runs Data & AI Challenge
+### Built by Team NeuralHire | India Runs Data & AI Challenge
 
 An intelligent candidate discovery and ranking engine that processes a pool of **100,000 candidates** and surfaces the top 100 fits for a given role using multi-dimensional scoring, honeypot filtering, and behavioral signals.
 
@@ -65,7 +65,7 @@ ai_candidate_ranker/
 ├── run.bat                   # 🟢 Windows one-click launcher (run this!)
 ├── aura_recruit.spec         # PyInstaller spec (for building the .exe)
 ├── submission_metadata.yaml  # Hackathon submission metadata
-└── team_antigravity.csv      # Our generated submission file
+└── submission.csv            # Generated submission file
 ```
 
 ---
@@ -75,7 +75,7 @@ ai_candidate_ranker/
 ```bash
 python rank.py \
   --candidates /path/to/candidates.jsonl \
-  --out team_antigravity.csv
+  --out submission.csv
 ```
 
 ---
@@ -83,7 +83,7 @@ python rank.py \
 ## ✅ Validating the Submission
 
 ```bash
-python validate_submission.py team_antigravity.csv
+python validate_submission.py submission.csv
 # Expected output: Submission is valid.
 ```
 
@@ -134,7 +134,3 @@ flask-cors>=4.0.0
 openpyxl>=3.1.0
 pyyaml>=6.0
 ```
-
----
-
-*Built with ❤️ by Team Antigravity for the India Runs Data & AI Challenge*

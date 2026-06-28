@@ -5,7 +5,7 @@ color 0A
 echo.
 echo  ============================================================
 echo    AURA RECRUIT — AI Candidate Ranker
-echo    Team Antigravity ^| India Runs Data ^& AI Challenge
+echo    Team NeuralHire ^| India Runs Data ^& AI Challenge
 echo  ============================================================
 echo.
 
