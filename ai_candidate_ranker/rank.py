@@ -416,11 +416,56 @@ def generate_reasoning(rank, candidate, subscores):
     return reason
 
 
+def print_table(top_100):
+    """
+    Prints the full ranked list as a formatted table in the terminal.
+    """
+    # Column widths
+    col_widths = [5, 20, 8, 32, 8, 22, 12]
+    headers = ["Rank", "Candidate ID", "Score", "Current Title", "YOE", "Location", "Notice (days)"]
+
+    sep = "+" + "+".join("-" * (w + 2) for w in col_widths) + "+"
+    header_row = "| " + " | ".join(h.ljust(col_widths[i]) for i, h in enumerate(headers)) + " |"
+
+    print("\n" + "=" * len(sep))
+    print("  AURA RECRUIT — Top 100 Ranked Candidates (NeuralHire)")
+    print("=" * len(sep))
+    print(sep)
+    print(header_row)
+    print(sep)
+
+    for i, (score, cid, cand, subscores) in enumerate(top_100):
+        rank = i + 1
+        profile = cand.get("profile", {})
+        title = profile.get("current_title", "")[:30]
+        loc   = profile.get("location", "")[:20]
+        yoe   = subscores["yoe"]
+        notice = subscores["notice"]
+
+        row = "| " + " | ".join([
+            str(rank).ljust(col_widths[0]),
+            cid[:col_widths[1]].ljust(col_widths[1]),
+            f"{score:.1f}".ljust(col_widths[2]),
+            title.ljust(col_widths[3]),
+            str(yoe).ljust(col_widths[4]),
+            loc.ljust(col_widths[5]),
+            str(notice).ljust(col_widths[6]),
+        ]) + " |"
+        print(row)
+
+        if rank in (10, 25, 50, 75):
+            print(sep)
+
+    print(sep)
+    print()
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Redrob hackathon ranker")
+    parser = argparse.ArgumentParser(description="NeuralHire — AuraRecruit Candidate Ranker")
     parser.add_argument("--candidates", required=True, help="Path to candidates.jsonl file")
     parser.add_argument("--out", required=True, help="Path to save submission.csv")
-    
+    parser.add_argument("--show", action="store_true", help="Print full ranked table in terminal")
+
     args = parser.parse_args()
     
     scored_candidates = []
@@ -454,9 +499,26 @@ def main():
     
     # Get top 100
     top_100 = scored_candidates[:100]
-    
+
+    # Always print a compact Top 10 summary
+    print("\n" + "=" * 70)
+    print("  TOP 10 CANDIDATES — Senior AI Engineer (NeuralHire / AuraRecruit)")
+    print("=" * 70)
+    print(f"  {'Rank':<5} {'Candidate ID':<20} {'Score':<8} {'Title':<30} {'YOE':<5}")
+    print("-" * 70)
+    for i, (score, cid, cand, subscores) in enumerate(top_100[:10]):
+        title = cand["profile"].get("current_title", "")[:28]
+        yoe   = subscores["yoe"]
+        print(f"  {i+1:<5} {cid:<20} {score:<8.1f} {title:<30} {yoe:<5}")
+    print("=" * 70)
+    print(f"  Full top-100 results will be saved to: {args.out}")
+    print("  Run with --show to print the full ranked table in terminal.\n")
+
+    # --show flag: print full ranked table
+    if args.show:
+        print_table(top_100)
+
     print(f"Writing top 100 rankings to: {args.out}")
-    # Create output directory if it doesn't exist
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
     with open(args.out, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f)
@@ -465,7 +527,7 @@ def main():
             rank = i + 1
             reason = generate_reasoning(rank, cand, subscores)
             writer.writerow([cid, rank, round(score, 4), reason])
-            
+
     print("Done! Ranking successfully completed.")
 
 
