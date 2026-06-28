@@ -1,0 +1,5 @@
+# Dependencies for Redrob Candidate Ranker & Dashboard
+pyyaml>=6.0
+flask>=3.0.0
+flask-cors>=4.0.0
+openpyxl>=3.1.0

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Velorah® — Where dreams rise through the silence.</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#1a1c1c",
+                        "primary-fixed": "#e2e2e2",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed-variant": "#454747",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-bright": "#3a3939",
+                        "surface-container-highest": "#353434",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-secondary-container": "#b7b5b4",
+                        "outline-variant": "#444748",
+                        "tertiary-fixed": "#e2e2e2",
+                        "background": "#141313",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffffff",
+                        "surface-variant": "#353434",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#141313",
+                        "tertiary-container": "#e2e2e2",
+                        "on-tertiary": "#2f3131",
+                        "secondary": "#c8c6c5",
+                        "on-primary": "#2f3131",
+                        "surface-container": "#201f1f",
+                        "on-surface-variant": "#c4c7c8",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "inverse-primary": "#5d5f5f",
+                        "on-primary-container": "#636565",
+                        "primary": "#ffffff",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "secondary-container": "#474746",
+                        "on-secondary": "#313030",
+                        "surface-dim": "#141313",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-tertiary-container": "#636565",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-tint": "#c6c6c7",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "outline": "#8e9192",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "inverse-on-surface": "#313030",
+                        "primary-container": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "1rem",
+                        "stack-md": "1.5rem",
+                        "gutter": "2rem",
+                        "section-gap": "8rem",
+                        "stack-sm": "0.5rem",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Instrument Serif"],
+                        "display-lg": ["Instrument Serif"],
+                        "display-md": ["Instrument Serif"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Instrument Serif"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["36px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "display-lg": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "display-md": ["48px", { "lineHeight": "1.1", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #141313;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: none;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .liquid-glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.4px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .liquid-glass:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .liquid-glass:active {
+            transform: scale(0.96);
+        }
+
+        @keyframes fade-rise {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-rise {
+            animation: fade-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        .scrim-overlay {
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .vignette-bottom {
+            background: linear-gradient(to top, rgba(20, 19, 19, 1) 0%, rgba(20, 19, 19, 0) 40%);
+        }
+    </style>
+</head>
+<body class="selection:bg-primary selection:text-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-white/10 bg-surface/40 backdrop-blur-xl flex justify-between items-center px-margin-mobile md:px-gutter py-stack-sm w-full z-50">
+<div class="font-display-md text-display-md text-primary tracking-tight" style="font-family: 'Instrument Serif', serif;">
+            Velorah<sup class="text-[0.4em] top-[-1em]">®</sup>
+</div>
+<nav class="hidden md:flex items-center space-x-gutter">
+<a class="text-primary font-bold border-b border-primary pb-1 font-body-md text-body-md transition-colors" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Studio</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">About</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Journal</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Reach Us</a>
+</nav>
+<button class="liquid-glass px-6 py-2.5 rounded-lg text-primary font-body-md text-body-md transition-transform active:scale-95">
+            Begin Journey
+        </button>
+</header>
+<!-- Hero Section -->
+<main class="relative min-h-screen w-full flex flex-col justify-center items-start overflow-hidden pt-20">
+<!-- Video Background -->
+<div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover grayscale-[20%] brightness-[0.7]" loop="" muted="" playsinline="">
+<source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4" type="video/mp4"/>
+</video>
+<!-- Overlays -->
+<div class="absolute inset-0 scrim-overlay pointer-events-none"></div>
+<div class="absolute inset-0 vignette-bottom pointer-events-none"></div>
+</div>
+<!-- Content Canvas -->
+<div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
+<div class="max-w-4xl">
+<h1 class="animate-fade-rise text-5xl sm:text-7xl md:text-8xl leading-[0.95] text-primary tracking-tighter" style="font-family: 'Instrument Serif', serif;">
+                    Where <span class="italic text-on-surface-variant/80">dreams</span> rise <br/>
+<span class="italic text-on-surface-variant/80">through the silence.</span>
+</h1>
+<p class="animate-fade-rise delay-100 mt-stack-md text-on-surface-variant font-body-lg text-body-lg max-w-2xl leading-relaxed">
+                    We're designing tools for deep thinkers, bold creators, and quiet rebels. 
+                    Amid the chaos, we build digital spaces for sharp focus and inspired work.
+                </p>
+<div class="animate-fade-rise delay-200 mt-section-gap/4 flex items-center gap-gutter">
+<button class="liquid-glass px-10 py-4 rounded-xl text-primary font-body-lg text-body-lg hover:opacity-80 transition-opacity">
+                        Begin Journey
+                    </button>
+<button class="hidden sm:inline-flex items-center gap-2 text-primary font-body-lg text-body-lg border-b border-white/20 pb-1 hover:border-white transition-colors">
+                        Explore the Journal
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-40">
+<span class="text-label-sm font-label-sm tracking-widest uppercase">Scroll</span>
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</main>
+<!-- Footer -->
+<footer class="relative z-10 w-full py-gutter bg-background border-t border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-mobile flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="flex flex-col items-center md:items-start">
+<div class="font-headline-lg text-headline-lg text-primary" style="font-family: 'Instrument Serif', serif;">
+                    Velorah<sup class="text-[0.4em] top-[-1em]">®</sup>
+</div>
+<p class="text-on-surface-variant font-label-sm text-label-sm mt-2">© 2024 Velorah. All rights reserved.</p>
+</div>
+<div class="flex gap-gutter">
+<a class="text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline font-label-sm text-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline font-label-sm text-label-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline font-label-sm text-label-sm" href="#">Studio Access</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for liquid glass buttons
+        document.querySelectorAll('.liquid-glass').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                button.style.setProperty('--x', `${x}px`);
+                button.style.setProperty('--y', `${y}px`);
+            });
+        });
+
+        // Simple observer to trigger animations if needed (though we use delayed entry)
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-rise');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-trigger').forEach(el => observer.observe(el));
+    </script>
+</body></html>

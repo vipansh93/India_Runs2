@@ -1,0 +1,44 @@
+# Redrob Hackathon — Submission Metadata
+team_name: "Antigravity-AI"
+
+primary_contact:
+  name: "Raj Kumar"
+  email: "rajkumar@example.com"
+  phone: "+91-9876543210"
+
+team_members:
+  - name: "Raj Kumar"
+    email: "rajkumar@example.com"
+    role: "ML Engineer"
+
+github_repo: "https://github.com/rajkumar/redrob-candidate-ranker"
+sandbox_link: "https://huggingface.co/spaces/rajkumar/redrob-ranker"
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+compute:
+  platform: "Local Windows PC"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.14.6"
+  os: "Windows 11"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+ai_tools_used:
+  - "Gemini"
+  - "Claude"
+
+ai_usage_summary: |
+  Used Gemini for code generation, structuring the ranker pipeline, and implementing the honeypot detection heuristics. Used Claude for architectural reviews and refinement of the scoring weights. No candidate data was shared with external LLM services during ranking.
+
+methodology_summary: |
+  An optimized, rule-based ranking engine utilizing standard Python libraries. Incorporates a strict semantic filtering pass that eliminates 7,533 honeypots and timeline inconsistencies (e.g., career duration mismatch, signup date discrepancies). Scores candidates by experience alignment (ideal 5–9 YOE), location (Noida/Pune hybrid or willing to relocate in India), title keywords, and NLP/IR tech skills. Scores are scaled by a multiplicative behavioral signal envelope (recurrent activity, response rate, low notice period, and high interview reliability). Runs in under 5 seconds for 100k candidates.
+
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true

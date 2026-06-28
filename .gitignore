@@ -1,0 +1,38 @@
+# ─── Large Dataset Files (too big for GitHub, 464 MB) ───────────────────────
+candidates.jsonl
+*.jsonl
+
+# ─── Compiled Executables & Build Artifacts ──────────────────────────────────
+*.exe
+*.dll
+build/
+dist/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# ─── PyInstaller ─────────────────────────────────────────────────────────────
+*.spec.bak
+*.manifest
+
+# ─── Python Virtual Environments ─────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ─── macOS junk ──────────────────────────────────────────────────────────────
+__MACOSX/
+.DS_Store
+._*
+
+# ─── Windows junk ────────────────────────────────────────────────────────────
+Thumbs.db
+desktop.ini
+
+# ─── IDE / Editor ────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo

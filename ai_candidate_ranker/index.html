@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AURA RECRUIT | Calculated Talent Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffffff",
+                        "background": "#141313",
+                        "surface": "#141313",
+                        "on-surface": "#e5e2e1",
+                        "outline": "#8e9192",
+                        "outline-variant": "#444748",
+                        "primary-fixed-dim": "#00dbe7",
+                        "secondary": "#c8c6c5",
+                        "surface-container": "#201f1f",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-highest": "#353434",
+                        "on-surface-variant": "#c4c7c8",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "primary-container": "#e2e2e2",
+                        "secondary-container": "#474746"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem",
+                        "3xl": "1.5rem"
+                    },
+                    spacing: {
+                        "margin-desktop": "80px",
+                        "margin-mobile": "24px",
+                        "container-max": "1440px",
+                        "gutter": "32px",
+                        "section-gap": "160px",
+                        "stack-sm": "0.5rem",
+                        "stack-md": "1.5rem",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "40px"
+                    },
+                    fontFamily: {
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Instrument Serif"],
+                        "display-md": ["Instrument Serif"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Instrument Serif"],
+                        "label-sm-mono": ["JetBrains Mono"],
+                        "label-mono": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "-0.01em" }],
+                        "body-md": ["16px", { "lineHeight": "1.6" }],
+                        "display-lg": ["88px", { "lineHeight": "1.0", "letterSpacing": "-0.02em" }],
+                        "display-md": ["48px", { "lineHeight": "1.1" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #141313;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: none;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .liquid-glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.4px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .liquid-glass:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .liquid-glass:active {
+            transform: scale(0.96);
+        }
+
+        .liquid-glass-pill {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+        }
+
+        .glass-panel {
+            background: rgba(20, 19, 19, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @keyframes fade-rise {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-rise {
+            animation: fade-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        .scrim-overlay {
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .vignette-bottom {
+            background: linear-gradient(to top, rgba(20, 19, 19, 1) 0%, rgba(20, 19, 19, 0) 40%);
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .terminal-log {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="selection:bg-primary selection:text-background font-body-md overflow-x-hidden">
+
+<!-- PAGE 1: VELORAH LANDING SHELL -->
+<div id="page-1" class="block w-full">
+    <!-- TopNavBar -->
+    <header class="fixed top-0 w-full z-50 border-b border-white/10 bg-surface/40 backdrop-blur-xl flex justify-between items-center px-margin-mobile md:px-gutter py-stack-sm w-full z-50">
+        <div class="font-display-md text-display-md text-primary tracking-tight" style="font-family: 'Instrument Serif', serif;">
+            Aura Recruit<sup class="text-[0.4em] top-[-1em]">®</sup>
+        </div>
+        <nav class="hidden md:flex items-center space-x-gutter">
+            <a class="text-primary font-bold border-b border-primary pb-1 font-body-md text-body-md transition-colors shadow-none" href="#" onclick="navigateToDashboard(); return false;">Shortlist</a>
+        </nav>
+        <button onclick="navigateToDashboard()" class="liquid-glass px-6 py-2.5 rounded-lg text-primary font-body-md text-body-md transition-transform active:scale-95">
+            Begin Journey
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="relative min-h-screen w-full flex flex-col justify-center items-start overflow-hidden pt-20">
+        <!-- Video Background -->
+        <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+            <video autoplay class="absolute inset-0 w-full h-full object-cover grayscale-[20%] brightness-[0.7]" loop muted playsinline>
+                <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4" type="video/mp4"/>
+            </video>
+            <!-- Overlays -->
+            <div class="absolute inset-0 scrim-overlay pointer-events-none"></div>
+            <div class="absolute inset-0 vignette-bottom pointer-events-none"></div>
+        </div>
+        <!-- Content Canvas -->
+        <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
+            <div class="max-w-4xl">
+                <h1 class="animate-fade-rise text-5xl sm:text-7xl md:text-8xl leading-[0.95] text-primary tracking-tighter" style="font-family: 'Instrument Serif', serif;">
+                    Where <span class="italic text-on-surface-variant/80">talent</span> meets <br/>
+                    <span class="italic text-on-surface-variant/80">calculated intelligence.</span>
+                </h1>
+                <p class="animate-fade-rise delay-100 mt-stack-md text-on-surface-variant font-body-lg text-body-lg max-w-2xl leading-relaxed">
+                    Aura Recruit is an AI-native candidate discovery and ranking system. 
+                    We evaluate 100,000 profiles against strict role parameters, programmatically filtering out services-only resumes and adversarial honeypots.
+                </p>
+                <div class="animate-fade-rise delay-200 mt-section-gap/4 flex items-center gap-gutter">
+                    <button onclick="navigateToDashboard()" class="liquid-glass px-10 py-4 rounded-xl text-primary font-body-lg text-body-lg hover:opacity-80 transition-opacity">
+                        Begin Journey
+                    </button>
+                    <button onclick="navigateToDashboard()" class="hidden sm:inline-flex items-center gap-2 text-primary font-body-lg text-body-lg border-b border-white/20 pb-1 hover:border-white transition-colors">
+                        Explore shortlists
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-40">
+            <span class="text-label-sm font-label-sm tracking-widest uppercase">Scroll</span>
+            <span class="material-symbols-outlined">expand_more</span>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 w-full py-gutter bg-background border-t border-outline-variant">
+        <div class="max-w-container-max mx-auto px-margin-mobile flex flex-col md:flex-row justify-between items-center gap-stack-md">
+            <div class="flex flex-col items-center md:items-start">
+                <div class="font-headline-lg text-headline-lg text-primary" style="font-family: 'Instrument Serif', serif;">
+                    Aura Recruit<sup class="text-[0.4em] top-[-1em]">®</sup>
+                </div>
+                <p class="text-on-surface-variant font-label-sm text-label-sm mt-2">© 2026 Aura Recruit. All rights reserved.</p>
+            </div>
+            <div class="flex gap-gutter">
+                <a class="text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline font-label-sm text-label-sm" href="#">Privacy Policy</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline font-label-sm text-label-sm" href="#">Terms of Service</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline font-label-sm text-label-sm" href="#">System Access</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- PAGE 2: ASME INTERACTIVE DASHBOARD SHELL -->
+<div id="page-2" class="hidden w-full min-h-screen bg-black relative flex flex-col">
+    <!-- Hero Background Video -->
+    <video autoplay class="absolute inset-0 w-full h-full object-cover opacity-60 hero-video z-0 pointer-events-none grayscale-[50%] brightness-[0.45]" id="heroVideo" loop muted playsinline>
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4" type="video/mp4"/>
+    </video>
+    <div class="absolute inset-0 bg-black/50 z-0 pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center px-margin-mobile md:px-margin-desktop py-6">
+        <div class="liquid-glass-pill px-8 py-3 flex items-center justify-between w-full max-w-6xl border border-white/10 shadow-2xl">
+            <div class="text-body-lg font-bold tracking-widest text-primary font-body-lg flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-xl animate-pulse">radar</span>
+                AURA DISCOVERY
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="navigateToHome()" class="text-label-caps font-label-caps px-5 py-2 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all">Back to Home</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard Body -->
+    <div class="relative z-10 flex-grow px-margin-mobile md:px-margin-desktop pt-28 pb-12 w-full max-w-7xl mx-auto flex flex-col gap-6">
+        
+        <!-- Header Controls (Role Selector) -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 shadow-2xl">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <span class="text-label-caps font-label-caps text-white/40 block mb-2">TARGET ROLE SELECTION</span>
+                    <h2 class="font-display-lg text-3xl font-bold text-primary" style="font-family: 'Instrument Serif', serif; font-size: 32px;">Choose Job Position</h2>
+                </div>
+                <!-- Role Dropdown Selector -->
+                <div class="relative w-full md:w-80">
+                    <select id="role-selector" class="w-full bg-black/60 border border-white/15 rounded-full py-3 px-6 text-white text-sm font-semibold focus:ring-1 focus:ring-white appearance-none cursor-pointer pr-10">
+                        <option value="senior_ai_engineer" selected>Senior AI Engineer - Founding Team</option>
+                        <option value="applied_ml_engineer">Applied Machine Learning Engineer</option>
+                        <option value="nlp_specialist">NLP & LLM Specialist</option>
+                        <option value="search_retrieval_engineer">Search & Information Retrieval Engineer</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none">expand_more</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Overview Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="liquid-glass p-5 rounded-3xl flex flex-col justify-between">
+                <span class="text-label-caps font-label-caps text-white/40 block mb-2">Total Pool</span>
+                <span id="stat-total" class="text-3xl font-bold font-display-md text-primary font-label-mono">100,000</span>
+                <span class="text-[10px] text-white/30 mt-1 block">Candidates Loaded</span>
+            </div>
+            <div class="liquid-glass p-5 rounded-3xl flex flex-col justify-between">
+                <span class="text-label-caps font-label-caps text-white/40 block mb-2">Filtered Traps</span>
+                <span id="stat-honeypots" class="text-3xl font-bold font-display-md text-error font-label-mono">7,533</span>
+                <span class="text-[10px] text-white/30 mt-1 block">Honeypots Excluded</span>
+            </div>
+            <div class="liquid-glass p-5 rounded-3xl flex flex-col justify-between">
+                <span class="text-label-caps font-label-caps text-white/40 block mb-2">Avg Experience</span>
+                <span id="stat-yoe" class="text-3xl font-bold font-display-md text-secondary font-label-mono">7.16 YOE</span>
+                <span class="text-[10px] text-white/30 mt-1 block">Within senior bracket</span>
+            </div>
+            <div class="liquid-glass p-5 rounded-3xl flex flex-col justify-between">
+                <span class="text-label-caps font-label-caps text-white/40 block mb-2">Highly Engaged</span>
+                <span id="stat-active" class="text-3xl font-bold font-display-md text-emerald-400 font-label-mono">500</span>
+                <span class="text-[10px] text-white/30 mt-1 block">Active on platform</span>
+            </div>
+        </div>
+
+        <!-- Split Grid Workspace -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            
+            <!-- Left Panel: Ranked Workers List (5 cols) -->
+            <div class="lg:col-span-5 flex flex-col">
+                <div class="glass-panel rounded-3xl border border-white/10 flex flex-col h-full">
+                    <div class="px-6 py-4 border-b border-white/5 flex items-center justify-between">
+                        <span class="text-label-caps font-label-caps text-white/40">Worker Ranking</span>
+                        <span class="text-[10px] font-label-sm-mono text-outline uppercase">Valid: 92,467</span>
+                    </div>
+                    <div id="candidates-list" class="flex-grow overflow-y-auto max-h-[620px] custom-scrollbar divide-y divide-white/5">
+                        <!-- Loaded dynamically -->
+                        <div class="p-12 text-center text-outline">
+                            <span class="material-symbols-outlined text-3xl animate-spin mb-2">progress_activity</span>
+                            <div class="text-xs font-label-mono">Scoring candidates...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Complete Worker Description & AI Analysis (7 cols) -->
+            <div class="lg:col-span-7 flex flex-col">
+                <div class="glass-panel rounded-3xl border border-white/10 p-6 flex flex-col h-full space-y-6 max-h-[680px]">
+                    
+                    <!-- Candidate Header & Gauge -->
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 border-b border-white/5 pb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-white text-xl">badge</span>
+                            </div>
+                            <div>
+                                <h3 id="drawer-name" class="font-display-lg text-3xl text-primary font-bold" style="font-family: 'Instrument Serif', serif;">Candidate Name</h3>
+                                <span id="drawer-id" class="font-label-sm-mono text-label-sm-mono text-white/40 block mt-1">CAND_0000000</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Score Gauge -->
+                        <div class="relative w-20 h-20 flex items-center justify-center flex-shrink-0 bg-black/40 rounded-full border border-white/5">
+                            <svg class="w-full h-full transform -rotate-90">
+                                <circle cx="40" cy="40" r="34" stroke="rgba(255,255,255,0.05)" stroke-width="4" fill="transparent"/>
+                                <circle id="gauge-circle" cx="40" cy="40" r="34" stroke="#ffffff" stroke-width="4" fill="transparent" stroke-dasharray="213.6" stroke-dashoffset="42.7"/>
+                            </svg>
+                            <div class="absolute text-center">
+                                <span id="drawer-score" class="text-base font-bold font-label-mono text-white">90.5</span>
+                                <div class="text-[7px] text-white/40 font-label-sm-mono uppercase tracking-widest">Score</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Worker Metadata Details -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-white/5 p-4 rounded-2xl border border-white/5 flex-shrink-0">
+                        <div>
+                            <span class="text-[9px] text-white/40 uppercase tracking-widest font-label-sm-mono block mb-1">Current Title</span>
+                            <span id="drawer-title" class="text-xs font-semibold text-white truncate block">Software Engineer</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-white/40 uppercase tracking-widest font-label-sm-mono block mb-1">Experience</span>
+                            <span id="drawer-yoe" class="text-xs font-semibold text-white">7.2 YOE</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-white/40 uppercase tracking-widest font-label-sm-mono block mb-1">Notice Period</span>
+                            <span id="drawer-notice" class="text-xs font-semibold text-white">15 Days</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-white/40 uppercase tracking-widest font-label-sm-mono block mb-1">Location</span>
+                            <span id="drawer-location" class="text-xs font-semibold text-white truncate block">Noida</span>
+                        </div>
+                    </div>
+
+                    <!-- Worker Details Scroll Area -->
+                    <div class="flex-grow overflow-y-auto pr-2 custom-scrollbar space-y-6">
+                        
+                        <!-- AI MATCH RATIONALE -->
+                        <div class="p-5 rounded-2xl border border-white/10 bg-white/5 relative">
+                            <div class="absolute -top-2.5 left-4 bg-zinc-950 px-3 border border-white/10 rounded text-[8px] font-label-sm-mono text-white uppercase tracking-widest">
+                                AI SUITABILITY ANALYSIS
+                            </div>
+                            <p id="drawer-reasoning" class="text-xs text-on-surface-variant leading-relaxed pt-2">
+                                Select a worker to display the AI match reasoning.
+                            </p>
+                        </div>
+
+                        <!-- MATCH METRICS (Progress Bars) -->
+                        <div class="space-y-3">
+                            <span class="text-[10px] text-white/40 uppercase tracking-widest font-label-sm-mono block">Score Breakdown Metrics</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-white/60">Technical Skills Match</span>
+                                        <span id="breakdown-skills-val" class="font-label-mono text-white">0%</span>
+                                    </div>
+                                    <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                        <div id="breakdown-skills-bar" class="h-full bg-white rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-white/60">Experience Alignment</span>
+                                        <span id="breakdown-exp-val" class="font-label-mono text-white">0%</span>
+                                    </div>
+                                    <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                        <div id="breakdown-exp-bar" class="h-full bg-white rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-white/60">Career Track Relevance</span>
+                                        <span id="breakdown-career-val" class="font-label-mono text-white">0%</span>
+                                    </div>
+                                    <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                        <div id="breakdown-career-bar" class="h-full bg-white rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-white/60">Company Fit & Tenure</span>
+                                        <span id="breakdown-company-val" class="font-label-mono text-white">0%</span>
+                                    </div>
+                                    <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                        <div id="breakdown-company-bar" class="h-full bg-white rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-white/60">Location Suitability</span>
+                                        <span id="breakdown-location-val" class="font-label-mono text-white">0%</span>
+                                    </div>
+                                    <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                        <div id="breakdown-location-bar" class="h-full bg-white rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-white/60">Platform Engagement Boost</span>
+                                        <span id="breakdown-behavioral-val" class="font-label-mono text-emerald-400 font-bold">1.00x</span>
+                                    </div>
+                                    <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                        <div id="breakdown-behavioral-bar" class="h-full bg-emerald-400 rounded-full transition-all duration-500" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STRENGTHS & CONCERNS -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Strengths -->
+                            <div class="p-4 rounded-2xl border border-emerald-500/10 bg-emerald-500/5 space-y-2">
+                                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest font-label-sm-mono flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs">check_circle</span> Key Strengths
+                                </span>
+                                <ul id="drawer-strengths" class="text-[11px] text-zinc-300 space-y-1.5 list-disc list-inside">
+                                    <!-- Dynamic strengths -->
+                                </ul>
+                            </div>
+                            <!-- Concerns -->
+                            <div class="p-4 rounded-2xl border border-amber-500/10 bg-amber-500/5 space-y-2">
+                                <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest font-label-sm-mono flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs">warning</span> Considerations
+                                </span>
+                                <ul id="drawer-concerns" class="text-[11px] text-zinc-300 space-y-1.5 list-disc list-inside">
+                                    <!-- Dynamic concerns -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Key Skills -->
+                        <div class="space-y-2">
+                            <span class="text-[10px] text-white/40 uppercase tracking-widest font-label-sm-mono block">Matched Skills Profile</span>
+                            <div id="drawer-skills" class="flex flex-wrap gap-1">
+                                <!-- Skill tags -->
+                            </div>
+                        </div>
+
+                        <!-- Behavioral Signals HUD -->
+                        <div class="space-y-2">
+                            <span class="text-[10px] text-white/40 uppercase tracking-widest font-label-sm-mono block">Engagement & Responsiveness Signals</span>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                                <div class="bg-white/5 p-2 rounded-xl border border-white/5">
+                                    <div class="text-[9px] text-white/40 font-label-mono uppercase">Response Rate</div>
+                                    <div id="signal-response-rate" class="text-sm font-bold text-white mt-1">-</div>
+                                </div>
+                                <div class="bg-white/5 p-2 rounded-xl border border-white/5">
+                                    <div class="text-[9px] text-white/40 font-label-mono uppercase">Interview Rate</div>
+                                    <div id="signal-interview-rate" class="text-sm font-bold text-white mt-1">-</div>
+                                </div>
+                                <div class="bg-white/5 p-2 rounded-xl border border-white/5">
+                                    <div class="text-[9px] text-white/40 font-label-mono uppercase">Offer Accept</div>
+                                    <div id="signal-offer-rate" class="text-sm font-bold text-white mt-1">-</div>
+                                </div>
+                                <div class="bg-white/5 p-2 rounded-xl border border-white/5">
+                                    <div class="text-[9px] text-white/40 font-label-mono uppercase">Platform Active</div>
+                                    <div id="signal-last-active" class="text-[10px] font-bold text-white mt-1 truncate">-</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Work History Timeline -->
+                        <div class="space-y-3">
+                            <span class="text-[10px] text-white/40 uppercase tracking-widest font-label-sm-mono block">Career History Details</span>
+                            <div id="drawer-experience" class="space-y-4 pl-4 border-l border-white/15 relative">
+                                <!-- timeline items -->
+                            </div>
+                        </div>
+
+                        <!-- Education -->
+                        <div class="space-y-2">
+                            <span class="text-[10px] text-white/40 uppercase tracking-widest font-label-sm-mono block">Education</span>
+                            <div id="drawer-education" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <!-- edu cards -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Controls and Console -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            
+            <!-- Controls Card (8 cols) -->
+            <div class="lg:col-span-8">
+                <div class="glass-panel rounded-3xl border border-white/10 p-6 space-y-4">
+                    <span class="text-label-caps font-label-caps text-white/40 block">SCORING CONTROLS</span>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <!-- Slider YOE -->
+                        <div class="p-3 bg-white/5 rounded-2xl border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] font-label-mono text-white/60">Experience</span>
+                                <span id="val-experience" class="text-[10px] font-label-sm-mono text-white font-semibold">1.0x</span>
+                            </div>
+                            <input id="slider-experience" type="range" min="0.0" max="3.0" step="0.1" value="1.0" class="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-white"/>
+                        </div>
+                        
+                        <!-- Slider Skills -->
+                        <div class="p-3 bg-white/5 rounded-2xl border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] font-label-mono text-white/60">Skills Match</span>
+                                <span id="val-skills" class="text-[10px] font-label-sm-mono text-white font-semibold">1.0x</span>
+                            </div>
+                            <input id="slider-skills" type="range" min="0.0" max="3.0" step="0.1" value="1.0" class="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-white"/>
+                        </div>
+
+                        <!-- Slider Location -->
+                        <div class="p-3 bg-white/5 rounded-2xl border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] font-label-mono text-white/60">Location</span>
+                                <span id="val-location" class="text-[10px] font-label-sm-mono text-white font-semibold">1.0x</span>
+                            </div>
+                            <input id="slider-location" type="range" min="0.0" max="3.0" step="0.1" value="1.0" class="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-white"/>
+                        </div>
+
+                        <!-- Slider Behavioral -->
+                        <div class="p-3 bg-white/5 rounded-2xl border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] font-label-mono text-white/60">Behavioral</span>
+                                <span id="val-behavioral" class="text-[10px] font-label-sm-mono text-white font-semibold">1.0x</span>
+                            </div>
+                            <input id="slider-behavioral" type="range" min="0.0" max="3.0" step="0.1" value="1.0" class="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-white"/>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                        <!-- Filter switches -->
+                        <div class="flex gap-4">
+                            <div class="flex items-center gap-2">
+                                <input id="toggle-consulting" type="checkbox" checked class="rounded bg-black border-white/15 text-white focus:ring-0 focus:ring-offset-0 w-4 h-4"/>
+                                <span class="text-[11px] font-label-mono text-white/60">IT Consulting Penalty</span>
+                            </div>
+                        </div>
+                        <!-- Action Buttons -->
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <button id="btn-run" class="liquid-glass px-10 py-3 rounded-full text-label-caps font-label-caps border border-white/20 hover:border-white/40 transition-all flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sm">settings_backup_restore</span>
+                                EXECUTE RANKING MODEL
+                            </button>
+                            <button id="btn-export" onclick="downloadXlsx()" class="px-8 py-3 rounded-full text-label-caps font-label-caps border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 hover:border-emerald-400/50 transition-all flex items-center gap-2 text-emerald-300">
+                                <span class="material-symbols-outlined text-sm">download</span>
+                                DOWNLOAD XLSX
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Console Log Terminal (4 cols) -->
+            <div class="lg:col-span-4">
+                <div class="glass-panel rounded-3xl border border-white/10 p-6 flex flex-col h-full">
+                    <span class="text-label-caps font-label-caps text-white/40 block mb-3">SYSTEM LOGS CONSOLE</span>
+                    <div id="terminal-console" class="terminal-log p-3 rounded-2xl text-[10px] text-zinc-400 h-28 flex-grow overflow-y-auto custom-scrollbar leading-relaxed font-mono">
+                        <div>[SYSTEM] System Alpha loaded...</div>
+                        <div>[SYSTEM] API listening on 127.0.0.1:5000</div>
+                        <div>[SYSTEM] In-memory database status: READY</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-10 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter border-t border-white/5 bg-zinc-950">
+        <div class="text-label-caps font-label-caps text-primary tracking-widest">AURA DISCOVERY</div>
+        <div class="text-body-md font-body-md text-white/30 text-xs">
+            © 2026 Aura Recruit. Calculated Talent Acquisition.
+        </div>
+    </footer>
+</div>
+
+<!-- App Routing and Logic Scripts -->
+<script>
+    // Navigation routing
+    function navigateToDashboard() {
+        document.getElementById("page-1").classList.add("hidden");
+        document.getElementById("page-2").classList.remove("hidden");
+        // Trigger initialization
+        initDashboard();
+    }
+
+    function navigateToHome() {
+        document.getElementById("page-2").classList.add("hidden");
+        document.getElementById("page-1").classList.remove("hidden");
+    }
+
+    // Micro-interactions for buttons
+    document.querySelectorAll('.liquid-glass').forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            button.style.setProperty('--x', `${x}px`);
+            button.style.setProperty('--y', `${y}px`);
+        });
+    });
+
+    // Observer for landing scroll elements
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+</script>
+
+<script>
+    // DASHBOARD APPLICATION CONTROLLER
+    const API_BASE = "http://127.0.0.1:5000/api";
+    let loadedCandidates = [];
+    let activeCandidateId = "";
+    
+    // Core NLP/IR skills to highlight (must match backend configs)
+    const NLP_IR_SKILLS = new Set([
+        "embeddings", "retrieval", "vector search", "hybrid search", "pinecone",
+        "weaviate", "qdrant", "milvus", "opensearch", "elasticsearch", "faiss",
+        "sentence-transformers", "bge", "e5", "pytorch", "tensorflow", "nlp",
+        "natural language processing", "information retrieval", "rag",
+        "evaluation frameworks", "ndcg", "mrr", "map", "llm", "llms", "fine-tuning",
+        "lora", "qlora", "peft", "xgboost", "learning to rank", "learning-to-rank",
+        "distributed systems", "inference optimization", "transformers", "hugging face",
+        "scikit-learn", "numpy", "pandas", "deep learning", "machine learning"
+    ]);
+
+    // Dashboard Elements
+    const terminal = document.getElementById("terminal-console");
+    const listContainer = document.getElementById("candidates-list");
+    const roleSelector = document.getElementById("role-selector");
+    
+    // Sliders
+    const sliders = {
+        experience: document.getElementById("slider-experience"),
+        skills: document.getElementById("slider-skills"),
+        location: document.getElementById("slider-location"),
+        behavioral: document.getElementById("slider-behavioral")
+    };
+    
+    const sliderVals = {
+        experience: document.getElementById("val-experience"),
+        skills: document.getElementById("val-skills"),
+        location: document.getElementById("val-location"),
+        behavioral: document.getElementById("val-behavioral")
+    };
+
+    const toggleConsulting = document.getElementById("toggle-consulting");
+    const btnRun = document.getElementById("btn-run");
+
+    // Profile card Elements
+    const drawerName = document.getElementById("drawer-name");
+    const drawerId = document.getElementById("drawer-id");
+    const drawerScore = document.getElementById("drawer-score");
+    const drawerTitle = document.getElementById("drawer-title");
+    const drawerYoe = document.getElementById("drawer-yoe");
+    const drawerNotice = document.getElementById("drawer-notice");
+    const drawerLocation = document.getElementById("drawer-location");
+    const drawerReasoning = document.getElementById("drawer-reasoning");
+    const drawerSkills = document.getElementById("drawer-skills");
+    const drawerExperience = document.getElementById("drawer-experience");
+    const drawerEducation = document.getElementById("drawer-education");
+    const gaugeCircle = document.getElementById("gauge-circle");
+
+    // Bind sliders UI
+    Object.keys(sliders).forEach(key => {
+        sliders[key].addEventListener("input", (e) => {
+            sliderVals[key].textContent = parseFloat(e.target.value).toFixed(1) + "x";
+        });
+    });
+
+    function log(message, type = "SYSTEM") {
+        const div = document.createElement("div");
+        const time = new Date().toLocaleTimeString();
+        div.textContent = `[${time}] [${type}] ${message}`;
+        terminal.appendChild(div);
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    async function loadStats() {
+        try {
+            const res = await fetch(`${API_BASE}/stats`);
+            const data = await res.json();
+            document.getElementById("stat-total").textContent = data.total_pool.toLocaleString();
+            document.getElementById("stat-honeypots").textContent = data.honeypots_filtered.toLocaleString();
+            document.getElementById("stat-yoe").textContent = data.average_experience + " YOE";
+            document.getElementById("stat-active").textContent = data.active_last_30d.toLocaleString();
+        } catch (err) {
+            log(`Stats fetch error: ${err.message}`, "ERROR");
+        }
+    }
+
+    async function fetchCandidates() {
+        try {
+            listContainer.innerHTML = `
+                <div class="p-12 text-center text-outline">
+                    <span class="material-symbols-outlined text-3xl animate-spin mb-2">progress_activity</span>
+                    <div class="text-xs font-label-mono">Running scoring engine...</div>
+                </div>
+            `;
+            const res = await fetch(`${API_BASE}/candidates`);
+            const data = await res.json();
+            loadedCandidates = data.candidates;
+            renderCandidates(loadedCandidates);
+            
+            // Auto-select top candidate if list is populated
+            if (loadedCandidates.length > 0) {
+                showCandidateDetails(loadedCandidates[0].candidate_id, 1);
+            }
+        } catch (err) {
+            log(`Candidates fetch error: ${err.message}`, "ERROR");
+        }
+    }
+
+    function renderCandidates(candidates) {
+        listContainer.innerHTML = "";
+        if (candidates.length === 0) {
+            listContainer.innerHTML = `<div class="p-12 text-center text-outline font-label-mono text-xs">No suitable workers matched.</div>`;
+            return;
+        }
+
+        candidates.forEach(cand => {
+            const card = document.createElement("div");
+            card.id = `cand-card-${cand.candidate_id}`;
+            card.className = `p-5 flex items-center justify-between gap-4 hover:bg-white/5 transition-all cursor-pointer border-l-4 border-transparent relative overflow-hidden group`;
+            
+            // Highlight active candidate
+            if (cand.candidate_id === activeCandidateId) {
+                card.className += " bg-white/5 border-white border-l-4";
+            }
+
+            card.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-white/10 flex items-center justify-center text-xs font-bold font-label-mono text-white">
+                        #${cand.rank}
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-white group-hover:text-primary transition-colors">${cand.name}</span>
+                            <span class="text-[9px] font-label-sm-mono text-white/40">${cand.candidate_id}</span>
+                        </div>
+                        <div class="text-[10px] text-white/50 font-label-mono mt-0.5">${cand.title} · ${cand.years_of_experience} YOE</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-xs font-label-mono text-white font-semibold">${cand.score.toFixed(1)}</span>
+                    <span class="material-symbols-outlined text-white/30 text-sm group-hover:text-white transition-colors">chevron_right</span>
+                </div>
+            `;
+
+            card.addEventListener("click", () => showCandidateDetails(cand.candidate_id, cand.rank));
+            listContainer.appendChild(card);
+        });
+    }
+
+    async function showCandidateDetails(cid, rank) {
+        // Toggle active border styling in list
+        if (activeCandidateId) {
+            const prev = document.getElementById(`cand-card-${activeCandidateId}`);
+            if (prev) {
+                prev.classList.remove("bg-white/5", "border-white");
+                prev.classList.add("border-transparent");
+            }
+        }
+        activeCandidateId = cid;
+        const currentCard = document.getElementById(`cand-card-${cid}`);
+        if (currentCard) {
+            currentCard.classList.remove("border-transparent");
+            currentCard.classList.add("bg-white/5", "border-white");
+        }
+
+        try {
+            // Retrieve detail profile
+            const res = await fetch(`${API_BASE}/candidates/${cid}`);
+            if (!res.ok) throw new Error("Worker profile endpoint error");
+            const detail = await res.json();
+
+            const rankObj = loadedCandidates.find(c => c.candidate_id === cid);
+            const score = rankObj ? rankObj.score : 0;
+            const reasoning = rankObj ? rankObj.reasoning : "N/A";
+
+            // Map UI
+            drawerName.textContent = detail.profile.anonymized_name;
+            drawerId.textContent = `${detail.candidate_id} · Rank #${rank}`;
+            drawerScore.textContent = score.toFixed(1);
+            drawerTitle.textContent = detail.profile.current_title;
+            drawerYoe.textContent = `${detail.profile.years_of_experience} YOE`;
+            drawerNotice.textContent = `${detail.redrob_signals.notice_period_days} Days Notice`;
+            drawerLocation.textContent = detail.profile.location;
+            drawerReasoning.textContent = reasoning;
+
+            // Animate score dial (radius 34, circumference 213.6)
+            const ratio = Math.min(score / 400, 1.0);
+            const offset = 213.6 - (213.6 * ratio);
+            gaugeCircle.style.strokeDashoffset = offset;
+
+            // Retrieve subscores
+            const sub = rankObj ? rankObj.subscores : { skill_score: 0, exp_score: 0, career_score: 0, company_score: 0, loc_score: 0, behavioral_mult: 1.0, matched_must_have: [], matched_nice_to_have: [] };
+            
+            // Set Progress Bars
+            const skillPct = Math.min(Math.max(0, (sub.skill_score || 0) / 60) * 100, 100);
+            const expPct = Math.min(Math.max(0, (sub.exp_score || 0) / 25) * 100, 100);
+            const careerPct = Math.min(Math.max(0, (sub.career_score || 0) / 30) * 100, 100);
+            const companyPct = Math.min(Math.max(0, (sub.company_score || 0) / 15) * 100, 100);
+            const locPct = Math.min(Math.max(0, (sub.loc_score || 0) / 20) * 100, 100);
+            const behMult = sub.behavioral_mult || 1.0;
+            const behPct = Math.min((behMult / 1.5) * 100, 100);
+
+            document.getElementById("breakdown-skills-bar").style.width = `${skillPct}%`;
+            document.getElementById("breakdown-skills-val").textContent = `${Math.round(skillPct)}%`;
+
+            document.getElementById("breakdown-exp-bar").style.width = `${expPct}%`;
+            document.getElementById("breakdown-exp-val").textContent = `${Math.round(expPct)}%`;
+
+            document.getElementById("breakdown-career-bar").style.width = `${careerPct}%`;
+            document.getElementById("breakdown-career-val").textContent = `${Math.round(careerPct)}%`;
+
+            document.getElementById("breakdown-company-bar").style.width = `${companyPct}%`;
+            document.getElementById("breakdown-company-val").textContent = `${Math.round(companyPct)}%`;
+
+            document.getElementById("breakdown-location-bar").style.width = `${locPct}%`;
+            document.getElementById("breakdown-location-val").textContent = `${Math.round(locPct)}%`;
+
+            document.getElementById("breakdown-behavioral-bar").style.width = `${behPct}%`;
+            document.getElementById("breakdown-behavioral-val").textContent = `${behMult.toFixed(2)}x`;
+
+            // Strengths and Concerns lists
+            const strengthsList = document.getElementById("drawer-strengths");
+            const concernsList = document.getElementById("drawer-concerns");
+            strengthsList.innerHTML = "";
+            concernsList.innerHTML = "";
+
+            const strengths = [];
+            const concerns = [];
+
+            // 1. Tenure
+            const careerHistory = detail.career_history || [];
+            let totalJobs = careerHistory.length;
+            let totalMonths = careerHistory.reduce((sum, job) => sum + (job.duration_months || 0), 0);
+            const avgTenure = totalJobs > 0 ? (totalMonths / totalJobs / 12.0) : 0;
+            
+            if (avgTenure >= 2.5) {
+                strengths.push(`Excellent career stability (averages ${avgTenure.toFixed(1)} years per job).`);
+            } else if (avgTenure < 1.3 && avgTenure > 0) {
+                concerns.push(`Short average job tenure (${avgTenure.toFixed(1)} years per job) suggests flight risk.`);
+            }
+
+            // 2. Notice period
+            const noticeDays = detail.redrob_signals.notice_period_days;
+            if (noticeDays <= 30) {
+                strengths.push(`Available quickly (${noticeDays}-day notice period).`);
+            } else if (noticeDays >= 90) {
+                concerns.push(`Long notice period (${noticeDays} days) may delay onboarding.`);
+            }
+
+            // 3. Location
+            const candLoc = detail.profile.location.toLowerCase();
+            const willingReloc = detail.redrob_signals.willing_to_relocate;
+            if (candLoc.includes("noida") || candLoc.includes("pune")) {
+                strengths.push(`Resides in target office location (${detail.profile.location}).`);
+            } else if (willingReloc) {
+                strengths.push(`Willing to relocate (currently in ${detail.profile.location}).`);
+            } else {
+                concerns.push(`Location mismatch: lives in ${detail.profile.location} and unwilling to relocate.`);
+            }
+
+            // 4. Platform active
+            const responseRate = detail.redrob_signals.recruiter_response_rate;
+            if (responseRate >= 0.75) {
+                strengths.push(`Highly responsive to recruiters (${Math.round(responseRate * 100)}% response rate).`);
+            } else if (responseRate < 0.35) {
+                concerns.push(`Low response rate (${Math.round(responseRate * 100)}% recruiter response rate).`);
+            }
+
+            // 5. Open to work
+            if (detail.redrob_signals.open_to_work_flag) {
+                strengths.push("Actively open to new opportunities.");
+            }
+
+            // 6. Matched skills
+            const matchedMusts = sub.matched_must_have || [];
+            if (matchedMusts.length >= 3) {
+                strengths.push(`Matches ${matchedMusts.length} must-have technical skills.`);
+            } else if (matchedMusts.length === 0) {
+                concerns.push("No direct must-have skill matches for target role.");
+            }
+
+            // Render lists
+            if (strengths.length === 0) {
+                strengthsList.innerHTML = `<li class="text-zinc-500 italic list-none">No specific strengths flagged.</li>`;
+            } else {
+                strengths.forEach(s => {
+                    const li = document.createElement("li");
+                    li.textContent = s;
+                    strengthsList.appendChild(li);
+                });
+            }
+
+            if (concerns.length === 0) {
+                concernsList.innerHTML = `<li class="text-zinc-500 italic list-none">No risk considerations flagged.</li>`;
+            } else {
+                concerns.forEach(c => {
+                    const li = document.createElement("li");
+                    li.textContent = c;
+                    concernsList.appendChild(li);
+                });
+            }
+
+            // Behavioral HUD
+            document.getElementById("signal-response-rate").textContent = `${Math.round((detail.redrob_signals.recruiter_response_rate || 0) * 100)}%`;
+            document.getElementById("signal-interview-rate").textContent = `${Math.round((detail.redrob_signals.interview_completion_rate || 0) * 100)}%`;
+            
+            const offerAccept = detail.redrob_signals.offer_acceptance_rate;
+            document.getElementById("signal-offer-rate").textContent = offerAccept >= 0 ? `${Math.round(offerAccept * 100)}%` : "N/A";
+            
+            // Format last active date nicely
+            const lastActiveStr = detail.redrob_signals.last_active_date;
+            if (lastActiveStr) {
+                try {
+                    const actDate = new Date(lastActiveStr);
+                    const daysAgo = Math.floor((new Date("2026-06-26") - actDate) / (1000 * 60 * 60 * 24));
+                    if (daysAgo <= 0) {
+                        document.getElementById("signal-last-active").textContent = "Active Today";
+                    } else if (daysAgo === 1) {
+                        document.getElementById("signal-last-active").textContent = "Active Yesterday";
+                    } else {
+                        document.getElementById("signal-last-active").textContent = `${daysAgo}d ago`;
+                    }
+                } catch {
+                    document.getElementById("signal-last-active").textContent = lastActiveStr;
+                }
+            } else {
+                document.getElementById("signal-last-active").textContent = "Unknown";
+            }
+
+            // Render Skills
+            drawerSkills.innerHTML = "";
+            const matchedMustSet = new Set((sub.matched_must_have || []).map(s => s.toLowerCase()));
+            const matchedNiceSet = new Set((sub.matched_nice_to_have || []).map(s => s.toLowerCase()));
+
+            detail.skills.forEach(s => {
+                const tag = document.createElement("span");
+                const sNameLower = s.name.toLowerCase();
+                
+                let tagClass = "bg-white/5 text-white/50 border border-white/5";
+                if (matchedMustSet.has(sNameLower)) {
+                    tagClass = "bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-bold";
+                } else if (matchedNiceSet.has(sNameLower)) {
+                    tagClass = "bg-blue-500/10 text-blue-300 border border-blue-500/20 font-semibold";
+                }
+                
+                tag.className = `px-2 py-0.5 rounded text-[10px] font-label-sm-mono ${tagClass}`;
+                tag.textContent = `${s.name} (${s.proficiency})`;
+                drawerSkills.appendChild(tag);
+            });
+
+            // Render Work History
+            drawerExperience.innerHTML = "";
+            const allMatchedSkills = [...matchedMustSet, ...matchedNiceSet];
+            
+            detail.career_history.forEach(job => {
+                const item = document.createElement("div");
+                item.className = "relative mb-md";
+                
+                const node = document.createElement("div");
+                node.className = "absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-white border-2 border-zinc-900";
+                item.appendChild(node);
+                
+                const start = job.start_date || "N/A";
+                const end = job.is_current ? "Present" : (job.end_date || "N/A");
+                
+                // Highlight matches in description
+                let highlightedDesc = job.description || "";
+                if (allMatchedSkills.length > 0 && highlightedDesc) {
+                    // Sort by length descending to avoid partial matches
+                    const sortedSkills = [...allMatchedSkills].sort((a,b) => b.length - a.length);
+                    sortedSkills.forEach(skill => {
+                        const escaped = skill.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                        const regex = new RegExp(`\\b(${escaped}s?)\\b`, 'gi');
+                        highlightedDesc = highlightedDesc.replace(regex, `<span class="text-white border-b border-white/30 font-semibold">$1</span>`);
+                    });
+                }
+                
+                item.innerHTML += `
+                    <div class="text-xs font-semibold text-white">${job.title}</div>
+                    <div class="text-[10px] text-white/50 font-label-mono mb-1">${job.company} · ${start} to ${end} (${job.duration_months} mos)</div>
+                    <p class="text-[11px] text-white/60 leading-relaxed">${highlightedDesc}</p>
+                `;
+                drawerExperience.appendChild(item);
+            });
+
+            // Render Education
+            drawerEducation.innerHTML = "";
+            detail.education.forEach(edu => {
+                const item = document.createElement("div");
+                item.className = "p-3 bg-white/5 rounded-2xl border border-white/5";
+                item.innerHTML = `
+                    <div class="text-xs font-semibold text-white">${edu.degree} in ${edu.field_of_study}</div>
+                    <div class="text-[10px] text-white/40 mt-1">${edu.institution} (${edu.start_year} - ${edu.end_year}) · <span class="text-white text-[8px] font-label-mono uppercase">${edu.tier}</span></div>
+                `;
+                drawerEducation.appendChild(item);
+            });
+
+        } catch (err) {
+            log(`Failed to fetch worker details: ${err.message}`, "ERROR");
+        }
+    }
+
+    // Dynamic re-ranking logic
+    btnRun.addEventListener("click", async () => {
+        log("Executing ranking recalculation...", "MODEL");
+        btnRun.disabled = true;
+        
+        listContainer.innerHTML = `
+            <div class="p-12 text-center text-outline">
+                <span class="material-symbols-outlined text-3xl animate-spin mb-2">progress_activity</span>
+                <div class="text-xs font-label-mono">Running neural scoring passes...</div>
+            </div>
+        `;
+
+        const requestBody = {
+            role_id: roleSelector.value,
+            experience_weight: parseFloat(sliders.experience.value),
+            skills_weight: parseFloat(sliders.skills.value),
+            location_weight: parseFloat(sliders.location.value),
+            behavioral_weight: parseFloat(sliders.behavioral.value),
+            consulting_filter_enabled: toggleConsulting.checked
+        };
+
+        log(`Target Position: ${roleSelector.options[roleSelector.selectedIndex].text}`, "MODEL");
+        log("Parsing 100,000 profiles against role parameters...", "MODEL");
+        log("Removing invalid honeypots and applying weights...", "MODEL");
+
+        try {
+            const start = performance.now();
+            const res = await fetch(`${API_BASE}/rank`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestBody)
+            });
+            const data = await res.json();
+            const duration = ((performance.now() - start) / 1000).toFixed(2);
+            
+            loadedCandidates = data.candidates;
+            renderCandidates(loadedCandidates);
+            
+            if (loadedCandidates.length > 0) {
+                showCandidateDetails(loadedCandidates[0].candidate_id, 1);
+            }
+            
+            log(`Scoring and sorting complete. Took ${duration} seconds.`, "MODEL");
+        } catch (err) {
+            log(`Failed to re-rank: ${err.message}`, "ERROR");
+            fetchCandidates();
+        }
+
+        btnRun.disabled = false;
+    });
+
+    // Trigger role selector change to automatically re-rank
+    roleSelector.addEventListener("change", () => {
+        log(`Position changed: re-running automatically...`);
+        btnRun.click();
+    });
+
+    // Lazy load stats and first ranking on entering Page 2
+    let isInitialized = false;
+    async function initDashboard() {
+        if (isInitialized) return;
+        log("Initializing Dashboard API bindings...");
+        await loadStats();
+        await fetchCandidates();
+        isInitialized = true;
+        log("Dashboard successfully synced with local Flask backend.");
+    }
+
+    // XLSX Export Download
+    async function downloadXlsx() {
+        const btn = document.getElementById("btn-export");
+        const originalHTML = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> GENERATING...`;
+        log("Generating XLSX export file...", "EXPORT");
+
+        try {
+            const roleId = roleSelector.value;
+            const res = await fetch(`${API_BASE}/export?role_id=${roleId}`);
+            if (!res.ok) throw new Error(`Server returned ${res.status}`);
+
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+
+            // Extract filename from Content-Disposition header or use default
+            const disposition = res.headers.get("Content-Disposition");
+            let filename = `aura_recruit_${roleId}.xlsx`;
+            if (disposition && disposition.includes("filename=")) {
+                filename = disposition.split("filename=")[1].replace(/"/g, "").trim();
+            }
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+
+            log(`XLSX exported successfully: ${filename}`, "EXPORT");
+        } catch (err) {
+            log(`XLSX export failed: ${err.message}`, "ERROR");
+            alert("Failed to export XLSX. Make sure the ranking has been executed first.");
+        }
+
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+    }
+</script>
+</body>
+</html>
